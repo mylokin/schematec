@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import collections
+
 import schematec.exc as exc
 
 
@@ -61,8 +63,20 @@ def boolean(value):
 
 
 def array(value):
-    pass
+    if value is None:
+        raise exc.ConvertationError(value)
+
+    if isinstance(value, collections.Iterable):
+        return list(value)
+
+    raise exc.ConvertationError(value)
 
 
 def dictionary(value):
-    pass
+    if value is None:
+        raise exc.ConvertationError(value)
+
+    if isinstance(value, collections.Mapping):
+        return dict(value)
+
+    raise exc.ConvertationError(value)
