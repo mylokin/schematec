@@ -4,9 +4,6 @@ import schematec.exc as exc
 
 
 def numeric(value):
-    if value is None:
-        raise exc.ConvertationError(value)
-
     if isinstance(value, (int, long)):
         return value
 
@@ -15,6 +12,9 @@ def numeric(value):
             return int(value)
         except ValueError:
             raise exc.ConvertationError(value)
+
+    if value is None:
+        raise exc.ConvertationError(value)
 
     raise exc.ConvertationError(value)
 
