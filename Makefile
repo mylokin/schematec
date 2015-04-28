@@ -2,7 +2,7 @@
 
 test:
 	flake8 .
-	nosetests --with-coverage --cover-package=schematec
+	python -m pytest --cov-report term-missing --cov schematec
 
 clean:
 	rm -rf build dist schematec.egg-info
