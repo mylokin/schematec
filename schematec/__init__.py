@@ -55,6 +55,11 @@ Containers:
 - list
 - dict
 
+Extended Data Types
+===================
+
+- datetime - based on str
+- regexp str - based on str
 
 Current Developments
 ====================
