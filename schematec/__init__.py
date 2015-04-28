@@ -19,7 +19,7 @@ Glossary
 
 Validator
 
-   Object that provides state of processed object. Is it suitable or not.
+   Configurable object that checks object for predefined conditions.
 
 Converter
 
