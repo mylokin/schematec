@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import absolute_import
 
 import pytest
@@ -47,3 +49,13 @@ def test_boolean_true():
 def test_boolean_false():
     with pytest.raises(exc.ConvertationError):
         converters.string(False)
+
+
+def test_unknown_type():
+    with pytest.raises(exc.ConvertationError):
+        converters.string(type)
+
+
+def test_unknown_encoding():
+    with pytest.raises(exc.ConvertationError):
+        converters.string('À')

@@ -23,16 +23,19 @@ def numeric(value):
 
 
 def string(value):
+    if isinstance(value, unicode):
+        return value
+
     if isinstance(value, bool):
         raise exc.ConvertationError(value)
 
     if isinstance(value, (int, long)):
         return unicode(value)
 
-    if isinstance(value, basestring):
+    if isinstance(value, str):
         try:
             return unicode(value)
-        except ValueError:
+        except UnicodeDecodeError:
             raise exc.ConvertationError(value)
 
     if value is None:
