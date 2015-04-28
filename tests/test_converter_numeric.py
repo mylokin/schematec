@@ -1,4 +1,7 @@
+import pytest
+
 import schematec.converters as converters
+import schematec.exc as exc
 
 
 def test_zero():
@@ -31,3 +34,16 @@ def test_positive_number_unicode_string():
 
 def test_negative_number_unicode_string():
     assert converters.numeric(u'-1') == -1
+
+
+def test_none():
+    with pytest.raises(exc.ConvertationError):
+        converters.numeric(None)
+
+
+def test_true():
+    assert converters.numeric(True) == 1
+
+
+def test_false():
+    assert converters.numeric(False) == 0
