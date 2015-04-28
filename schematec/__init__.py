@@ -52,7 +52,13 @@ from converters. `Source code <https://github.com/wtforms/wtforms/blob/master/wt
 Validators are simple objects. ``__init__`` method provides a way to configure validator.
 ``__call__`` method provides a way to process validation.
 
-Validation is bound to forms objects. Reasons are not clear.
+Validation is bound to forms objects. This has been made to provide ``EqualTo``
+functionality. Reflects connections between form fields.
+
+WTForms users ``ValidationError`` and ``StopValidation`` exceptions.
+``ValidationError`` is used for errors forwarding.
+``StopValidation`` is used to skip steps. Thus some validation steps could be optional.
+
 '''
 
 __version__ = '0.1.0'
