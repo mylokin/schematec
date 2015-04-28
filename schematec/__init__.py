@@ -25,6 +25,17 @@ Converter
 
    Converter casts input object to required type if possible.
 
+Validation
+
+   Checking process where every value validated through set of validators.
+
+Validators
+==========
+
+Required
+
+   Required value, nuff to said.
+
 Current Developments
 ====================
 
