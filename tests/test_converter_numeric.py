@@ -50,6 +50,16 @@ def test_negative_number_unicode_string():
     assert converters.numeric(u'-1') == -1
 
 
+def test_not_number_string():
+    with pytest.raises(exc.ConvertationError):
+        converters.numeric('a')
+
+
+def test_empty_string():
+    with pytest.raises(exc.ConvertationError):
+        converters.numeric('')
+
+
 def test_none():
     with pytest.raises(exc.ConvertationError):
         converters.numeric(None)
@@ -69,3 +79,8 @@ def test_boolean_false():
 
 def test_boolean_false_type():
     assert isinstance(converters.numeric(False), int)
+
+
+def test_unknown_type():
+    with pytest.raises(exc.ConvertationError):
+        converters.numeric(type)
