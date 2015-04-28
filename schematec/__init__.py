@@ -29,6 +29,10 @@ Validation
 
    Checking process where every value validated through set of validators.
 
+Schema
+
+   Set of validators
+
 Validators
 ==========
 
