@@ -25,13 +25,13 @@ Converter
 
    Converter casts input object to required type if possible.
 
-Validation
-
-   Checking process where every value validated through set of validators.
-
 Schema
 
    Set of validators
+
+Validation
+
+   Checking process where every value validated through set of validators.
 
 Validators
 ==========
@@ -89,6 +89,14 @@ django-data-schema
 
 Module `implements <https://github.com/ambitioninc/django-data-schema/blob/develop/data_schema/convert_value.py>`_
 data converters.
+
+
+API Examples
+============
+
+::
+
+
 '''
 
 __version__ = '0.1.0'
