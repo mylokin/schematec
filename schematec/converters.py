@@ -4,6 +4,9 @@ import schematec.exc as exc
 
 
 def numeric(value):
+    if isinstance(value, bool):
+        return int(value)
+
     if isinstance(value, (int, long)):
         return int(value)
 
