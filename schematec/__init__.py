@@ -40,6 +40,22 @@ Required
 
    Required value, nuff to said.
 
+Supported Data Types
+====================
+
+Schematec supports subset of JSON data types:
+
+Basic types:
+- int
+- str
+- bool
+- None
+
+Containers:
+- list
+- dict
+
+
 Current Developments
 ====================
 
