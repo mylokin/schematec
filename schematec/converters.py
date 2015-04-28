@@ -5,7 +5,7 @@ import schematec.exc as exc
 
 def numeric(value):
     if isinstance(value, (int, long)):
-        return value
+        return int(value)
 
     if isinstance(value, basestring):
         try:
