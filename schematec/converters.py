@@ -4,6 +4,9 @@ import schematec.exc as exc
 
 
 def numeric(value):
+    if value is None:
+        raise exc.ConvertationError(value)
+
     if isinstance(value, bool):
         return int(value)
 
@@ -16,13 +19,13 @@ def numeric(value):
         except ValueError:
             raise exc.ConvertationError(value)
 
-    if value is None:
-        raise exc.ConvertationError(value)
-
     raise exc.ConvertationError(value)
 
 
 def string(value):
+    if value is None:
+        raise exc.ConvertationError(value)
+
     if isinstance(value, unicode):
         return value
 
@@ -38,14 +41,23 @@ def string(value):
         except UnicodeDecodeError:
             raise exc.ConvertationError(value)
 
-    if value is None:
-        raise exc.ConvertationError(value)
-
     raise exc.ConvertationError(value)
 
 
 def boolean(value):
-    pass
+    if value is None:
+        raise exc.ConvertationError(value)
+
+    if isinstance(value, bool):
+        return value
+
+    if isinstance(value, (int, long)) and value in (0, 1):
+        return bool(value)
+
+    if isinstance(value, basestring) and value in (u'0', u'1'):
+        return bool(int(value))
+
+    raise exc.ConvertationError(value)
 
 
 def array(value):
