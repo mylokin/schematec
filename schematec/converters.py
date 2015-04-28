@@ -23,7 +23,22 @@ def numeric(value):
 
 
 def string(value):
-    pass
+    if isinstance(value, bool):
+        raise exc.ConvertationError(value)
+
+    if isinstance(value, (int, long)):
+        return unicode(value)
+
+    if isinstance(value, basestring):
+        try:
+            return unicode(value)
+        except ValueError:
+            raise exc.ConvertationError(value)
+
+    if value is None:
+        raise exc.ConvertationError(value)
+
+    raise exc.ConvertationError(value)
 
 
 def boolean(value):
