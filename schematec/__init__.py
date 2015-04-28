@@ -46,14 +46,13 @@ Supported Data Types
 Schematec supports subset of JSON data types:
 
 Basic types:
-- int
-- str
-- bool
-- None
+- numeric(int)
+- string(str)
+- boolean(bool)
 
 Containers:
-- list
-- dict
+- array(list)
+- dictionary(dict)
 
 Extended Data Types
 ===================
