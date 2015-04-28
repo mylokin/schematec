@@ -12,6 +12,8 @@ Concepts
 
 Schematec separates concept of validation and concept of types casting.
 
+Object deconstruction seems reasonable useful for input data filtering.
+
 Glossary
 ========
 
@@ -59,6 +61,19 @@ WTForms users ``ValidationError`` and ``StopValidation`` exceptions.
 ``ValidationError`` is used for errors forwarding.
 ``StopValidation`` is used to skip steps. Thus some validation steps could be optional.
 
+
+scheme
+------
+
+Scheme `provides <https://github.com/arterial-io/scheme/tree/master/scheme/fields>`_
+wide range of different types validators. It extracts types conversion into
+serializers/deserializers.
+
+django-data-schema
+------------------
+
+Module `implements <https://github.com/ambitioninc/django-data-schema/blob/develop/data_schema/convert_value.py>`_
+data converters.
 '''
 
 __version__ = '0.1.0'
