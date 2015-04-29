@@ -1,3 +1,42 @@
+'''
+Convertaion rules
+=================
+
+Can be converted into:
+
+numeric
+-------
+
+#. Any int or long value
+#. Any suitable string/unicode
+#. Boolean value
+
+string
+------
+
+#. Any suitable string/unicode
+#. Any int or long value
+
+boolean
+-------
+
+#. Boolean value
+#. 0 or 1
+#. '0' or '1'
+#. u'0' or u'1'
+
+array
+-----
+
+#. Any iterable value(collections.Iterable)
+
+dictionary
+----------
+
+#. Any mapping value(collections.Mapping)
+
+
+'''
 from __future__ import absolute_import
 
 import collections
