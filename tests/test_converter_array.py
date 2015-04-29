@@ -6,6 +6,11 @@ import schematec.converters as converters
 import schematec.exc as exc
 
 
+def test_none():
+    with pytest.raises(exc.ConvertationError):
+        converters.array(None)
+
+
 def test_empty_list():
     assert converters.array([]) == []
 
