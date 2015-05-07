@@ -14,6 +14,15 @@ Schematec separates concept of validation and concept of types casting.
 
 Object deconstruction seems reasonable useful for input data filtering.
 
+Workflow
+--------
+
+Schematec determine validity of data using following criterias:
+
+# Existence
+# Type
+# Suitability
+
 Glossary
 ========
 
