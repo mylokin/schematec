@@ -40,6 +40,14 @@ Required
 
    Required value, nuff to said.
 
+Regex (URL, Email, IPAddress)
+
+    String contains expected value.
+
+Length
+
+    Length of iteratable is appropriate.
+
 Supported Data Types
 ====================
 
