@@ -23,6 +23,20 @@ Schematec determine validity of data using following criterias:
 # Type
 # Suitability
 
+Example::
+
+   a = string and email and required
+
+   ### Cases
+
+   {}  # invalid by existence
+   {'a': None}  # invalid by type
+   {'a': []}  # invalid by type
+   {'a': 1}  # invalid by suitability
+   {'a': ''}  # invalid by suitability
+   {'a': 'mylokin'}  # invalid by suitability
+   {'a': 'mylokin@me.com'}  # valid
+
 Glossary
 ========
 
