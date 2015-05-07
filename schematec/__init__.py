@@ -59,15 +59,19 @@ Validation
 Validators
 ==========
 
-Required
+Required -- any
 
    Required value, nuff to said.
 
-Regex (URL, Email, IPAddress)
+Regex (URL, Email, IPAddress) -- string
 
     String contains expected value.
 
-Length
+Range -- integer
+
+    Integer within range
+
+Length -- string, array, dictionary
 
     Length of iteratable is appropriate.
 
