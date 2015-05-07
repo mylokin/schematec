@@ -19,9 +19,9 @@ Workflow
 
 Schematec determine validity of data using following criterias:
 
-# Existence
-# Type
-# Suitability
+# Existence (schema validator)
+# Type (converter)
+# Suitability (validator)
 
 Example::
 
