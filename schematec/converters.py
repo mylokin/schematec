@@ -44,7 +44,12 @@ import collections
 import schematec.exc as exc
 
 
-class Numeric(object):
+class Converter(object):
+    def __init__(self, name=None):
+        self.name = name
+
+
+class Numeric(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -66,7 +71,7 @@ class Numeric(object):
 numeric = Numeric()
 
 
-class String(object):
+class String(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -91,7 +96,7 @@ class String(object):
 string = String()
 
 
-class Boolean(object):
+class Boolean(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -110,7 +115,7 @@ class Boolean(object):
 boolean = Boolean()
 
 
-class Array(object):
+class Array(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -123,7 +128,7 @@ class Array(object):
 array = Array()
 
 
-class Dictionary(object):
+class Dictionary(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
