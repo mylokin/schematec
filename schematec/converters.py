@@ -44,78 +44,93 @@ import collections
 import schematec.exc as exc
 
 
-def numeric(value):
-    if value is None:
-        raise exc.ConvertationError(value)
+class Numeric(object):
+    def __call__(self, value):
+        if value is None:
+            raise exc.ConvertationError(value)
 
-    if isinstance(value, bool):
-        return int(value)
-
-    if isinstance(value, (int, long)):
-        return int(value)
-
-    if isinstance(value, basestring):
-        try:
+        if isinstance(value, bool):
             return int(value)
-        except ValueError:
+
+        if isinstance(value, (int, long)):
+            return int(value)
+
+        if isinstance(value, basestring):
+            try:
+                return int(value)
+            except ValueError:
+                raise exc.ConvertationError(value)
+
+        raise exc.ConvertationError(value)
+
+numeric = Numeric()
+
+
+class String(object):
+    def __call__(self, value):
+        if value is None:
             raise exc.ConvertationError(value)
 
-    raise exc.ConvertationError(value)
+        if isinstance(value, unicode):
+            return value
 
+        if isinstance(value, bool):
+            raise exc.ConvertationError(value)
 
-def string(value):
-    if value is None:
-        raise exc.ConvertationError(value)
-
-    if isinstance(value, unicode):
-        return value
-
-    if isinstance(value, bool):
-        raise exc.ConvertationError(value)
-
-    if isinstance(value, (int, long)):
-        return unicode(value)
-
-    if isinstance(value, str):
-        try:
+        if isinstance(value, (int, long)):
             return unicode(value)
-        except UnicodeDecodeError:
+
+        if isinstance(value, str):
+            try:
+                return unicode(value)
+            except UnicodeDecodeError:
+                raise exc.ConvertationError(value)
+
+        raise exc.ConvertationError(value)
+
+string = String()
+
+
+class Boolean(object):
+    def __call__(self, value):
+        if value is None:
             raise exc.ConvertationError(value)
 
-    raise exc.ConvertationError(value)
+        if isinstance(value, bool):
+            return value
 
+        if isinstance(value, (int, long)) and value in (0, 1):
+            return bool(value)
 
-def boolean(value):
-    if value is None:
+        if isinstance(value, basestring) and value in (u'0', u'1'):
+            return bool(int(value))
+
         raise exc.ConvertationError(value)
 
-    if isinstance(value, bool):
-        return value
-
-    if isinstance(value, (int, long)) and value in (0, 1):
-        return bool(value)
-
-    if isinstance(value, basestring) and value in (u'0', u'1'):
-        return bool(int(value))
-
-    raise exc.ConvertationError(value)
+boolean = Boolean()
 
 
-def array(value):
-    if value is None:
+class Array(object):
+    def __call__(self, value):
+        if value is None:
+            raise exc.ConvertationError(value)
+
+        if isinstance(value, collections.Iterable):
+            return list(value)
+
         raise exc.ConvertationError(value)
 
-    if isinstance(value, collections.Iterable):
-        return list(value)
-
-    raise exc.ConvertationError(value)
+array = Array()
 
 
-def dictionary(value):
-    if value is None:
+class Dictionary(object):
+    def __call__(self, value):
+        if value is None:
+            raise exc.ConvertationError(value)
+
+        if isinstance(value, collections.Mapping):
+            return dict(value)
+
         raise exc.ConvertationError(value)
 
-    if isinstance(value, collections.Mapping):
-        return dict(value)
-
-    raise exc.ConvertationError(value)
+dictionary = Dictionary()
