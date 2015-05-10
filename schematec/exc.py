@@ -8,3 +8,7 @@ class SchemaError(SchematecError):
 
 class ConvertationError(SchematecError):
     pass
+
+
+class ValidationError(SchematecError):
+    pass
