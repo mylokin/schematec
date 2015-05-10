@@ -29,13 +29,38 @@ Example::
 
    ### Cases
 
-   {}  # invalid by existence
+   {'a': 'mylokin@me.com'}  # valid
+   {'a': 'mylokin'}  # invalid by suitability
+   {'a': ''}  # invalid by suitability
+   {'a': 1}  # invalid by suitability
    {'a': None}  # invalid by type
    {'a': []}  # invalid by type
-   {'a': 1}  # invalid by suitability
-   {'a': ''}  # invalid by suitability
-   {'a': 'mylokin'}  # invalid by suitability
+   {}  # invalid by existence
+
+   a = string and email
+
+   ### Cases
+
    {'a': 'mylokin@me.com'}  # valid
+   {'a': 'mylokin'}  # invalid by suitability
+   {'a': ''}  # invalid by suitability
+   {'a': 1}  # invalid by suitability
+   {'a': None}  # invalid by type
+   {'a': []}  # invalid by type
+   {}  # valid
+
+   a = string
+
+   ### Cases
+
+   {'a': 'mylokin@me.com'}  # valid
+   {'a': 'mylokin'}  # valid
+   {'a': ''}  # valid
+   {'a': 1}  # valid
+   {'a': None}  # invalid by type
+   {'a': []}  # invalid by type
+   {}  # valid
+
 
 Glossary
 ========
