@@ -23,6 +23,7 @@ Schematec determine validity of data using following criterias:
 #. Suitability (validator)
 
 Example:
+
 .. code:: python
 
    a = string and email and required
