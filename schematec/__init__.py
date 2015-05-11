@@ -86,7 +86,7 @@ Validators
 
 Required -- any
 
-   Required value, nuff to said.
+   Required value, (everything is optional by default).
 
 Regex (URL, Email, IPAddress) -- string
 
@@ -119,6 +119,13 @@ Extended Data Types
 
 - datetime - based on str
 - regexp str - based on str
+
+Order of schema check
+=====================
+
+#. Unbound Validators
+#. Converters
+#. Bound Validators
 
 Current Developments
 ====================
@@ -175,6 +182,7 @@ API Examples
 ============
 
 ::
+
 
 
 '''
