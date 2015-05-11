@@ -19,7 +19,7 @@ setup(
     packages=['schematec'],
     package_data={'': ['LICENSE']},
     version=version,
-    description='Data models for Mongo',
+    description='Set of tools that makes input data validation easier',
     author='Andrey Gubarev',
     author_email='mylokin@me.com',
     url='https://github.com/mylokin/schematec',
