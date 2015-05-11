@@ -4,7 +4,7 @@ import schematec.exc as exc
 
 
 class Validator(object):
-    pass
+    BINDING = None
 
 
 class Required(Validator):
