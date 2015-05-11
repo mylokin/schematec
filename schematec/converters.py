@@ -45,8 +45,7 @@ import schematec.exc as exc
 
 
 class Converter(object):
-    def __init__(self, name=None):
-        self.name = name
+    pass
 
 
 class Numeric(Converter):
