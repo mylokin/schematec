@@ -29,6 +29,7 @@ class Schema(object):
                 value = converter(value)
             bound_validators = [v for v in descriptors if isinstance(v, schematec.validators.Validator) and v.BINDING]
             for validator in bound_validators:
-                validator(value)
+                if isinstance(value, validator.BINDING):
+                    validator(value)
             result[name] = value
         return result
