@@ -12,3 +12,4 @@ class Required(Validator):
         if name not in data:
             raise exc.ValidationError(name)
 
+required = Required()
