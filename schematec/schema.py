@@ -5,8 +5,9 @@ import schematec.abc
 
 class Schema(object):
     '''
-    Converters is appliyed first in orderder they defined
-    Validators is appliyed second.
+    Unbound validators is appliyed first.
+    Converters is appliyed second in orderder they defined
+    Bound validators is appliyed third.
     '''
 
     def __init__(self, **descriptors):
