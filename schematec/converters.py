@@ -11,6 +11,13 @@ integer
 #. Any suitable string/unicode
 #. Boolean value
 
+number
+-------
+
+#. Any float or int or long value
+#. Any suitable string/unicode
+#. Boolean value
+
 string
 ------
 
