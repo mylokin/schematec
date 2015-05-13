@@ -1,8 +1,6 @@
 from __future__ import absolute_import
 
 import schematec.abc
-import schematec.converters
-import schematec.validators
 
 
 class Schema(object):
