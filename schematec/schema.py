@@ -32,6 +32,10 @@ class Dictionary(abc.Schema):
             except KeyError:
                 continue
 
+            schemas = [s for s in descriptors if isinstance(s, abc.Schema)]
+            for schema in schemas:
+                value = schema(value)
+
             converters = [c for c in descriptors if isinstance(c, abc.Converter)]
             for converter in converters:
                 value = converter(value)
@@ -58,10 +62,14 @@ class Array(abc.Schema):
     def __call__(self, data):
         data = schematec.converters.array(data)
 
-        converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
         if not self.descriptors:
             return data
 
+        schemas = [s for s in self.descriptors if isinstance(s, abc.Schema)]
+        for schema in schemas:
+            data = map(schema, data)
+
+        converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
         for converter in converters:
             data = map(converter, data)
 
