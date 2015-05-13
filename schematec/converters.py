@@ -70,6 +70,28 @@ class Integer(Converter):
 integer = Integer()
 
 
+class Number(Converter):
+    def __call__(self, value):
+        if value is None:
+            raise exc.ConvertationError(value)
+
+        if isinstance(value, bool):
+            return float(value)
+
+        if isinstance(value, (float, int, long)):
+            return float(value)
+
+        if isinstance(value, basestring):
+            try:
+                return float(value)
+            except ValueError:
+                raise exc.ConvertationError(value)
+
+        raise exc.ConvertationError(value)
+
+number = Number()
+
+
 class String(Converter):
     def __call__(self, value):
         if value is None:
