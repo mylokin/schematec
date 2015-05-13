@@ -16,6 +16,9 @@ class Dictionary(object):
     def __call__(self, data):
         data = schematec.converters.dictionary(data)
 
+        if not self.descriptors:
+            return data
+
         result = {}
 
         for name, descriptors in self.descriptors.items():
@@ -56,6 +59,9 @@ class Array(object):
         data = schematec.converters.array(data)
 
         converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
+        if not self.descriptors:
+            return data
+
         for converter in converters:
             data = map(converter, data)
 
