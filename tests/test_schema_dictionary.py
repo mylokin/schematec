@@ -15,7 +15,7 @@ def test_empty_schema_with_empty_value():
 
 def test_empty_schema_with_non_empty_value():
     schema = schematec.schema.dictionary()
-    assert schema({'a': 1}) == {}
+    assert schema({'a': 1}) == {'a': 1}
 
 
 def test_schema_with_missed_keys():
