@@ -1,6 +1,10 @@
 from __future__ import absolute_import
 
 
+class Schema(object):
+    pass
+
+
 class Converter(object):
     pass
 
