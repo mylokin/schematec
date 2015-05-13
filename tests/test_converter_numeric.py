@@ -7,80 +7,80 @@ import schematec.exc as exc
 
 
 def test_zero():
-    assert converters.numeric(0) == 0
+    assert converters.integer(0) == 0
 
 
 def test_positive_number():
-    assert converters.numeric(1) == 1
+    assert converters.integer(1) == 1
 
 
 def test_negative_number():
-    assert converters.numeric(-1) == -1
+    assert converters.integer(-1) == -1
 
 
 def test_long():
-    assert converters.numeric(1L) == 1
+    assert converters.integer(1L) == 1
 
 
 def test_long_type():
-    assert isinstance(converters.numeric(1L), int)
+    assert isinstance(converters.integer(1L), int)
 
 
 def test_positive_number_string():
-    assert converters.numeric('1') == 1
+    assert converters.integer('1') == 1
 
 
 def test_positive_number_string_type():
-    assert isinstance(converters.numeric('1'), int)
+    assert isinstance(converters.integer('1'), int)
 
 
 def test_negative_number_string():
-    assert converters.numeric('-1') == -1
+    assert converters.integer('-1') == -1
 
 
 def test_positive_number_unicode_string():
-    assert converters.numeric(u'1') == 1
+    assert converters.integer(u'1') == 1
 
 
 def test_positive_number_unicode_string_type():
-    assert isinstance(converters.numeric(u'1'), int)
+    assert isinstance(converters.integer(u'1'), int)
 
 
 def test_negative_number_unicode_string():
-    assert converters.numeric(u'-1') == -1
+    assert converters.integer(u'-1') == -1
 
 
 def test_not_number_string():
     with pytest.raises(exc.ConvertationError):
-        converters.numeric('a')
+        converters.integer('a')
 
 
 def test_empty_string():
     with pytest.raises(exc.ConvertationError):
-        converters.numeric('')
+        converters.integer('')
 
 
 def test_none():
     with pytest.raises(exc.ConvertationError):
-        converters.numeric(None)
+        converters.integer(None)
 
 
 def test_boolean_true():
-    assert converters.numeric(True) == 1
+    assert converters.integer(True) == 1
 
 
 def test_boolean_true_type():
-    assert isinstance(converters.numeric(True), int)
+    assert isinstance(converters.integer(True), int)
 
 
 def test_boolean_false():
-    assert converters.numeric(False) == 0
+    assert converters.integer(False) == 0
 
 
 def test_boolean_false_type():
-    assert isinstance(converters.numeric(False), int)
+    assert isinstance(converters.integer(False), int)
 
 
 def test_unknown_type():
     with pytest.raises(exc.ConvertationError):
-        converters.numeric(type)
+        converters.integer(type)

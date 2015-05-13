@@ -108,7 +108,7 @@ Schematec supports subset of JSON data types:
 
 Basic types:
 
-- numeric(int)
+- integer(int)
 - string(str)
 - boolean(bool)
 

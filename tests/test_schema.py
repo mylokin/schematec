@@ -25,30 +25,30 @@ def test_schema_with_missed_keys():
     assert schema({'b': 1}) == {}
 
 
-def test_numeric_to_string_converter():
+def test_integer_to_string_converter():
     schema = schematec.schema.Schema(
         a=[converters.string]
     )
     assert schema({'a': 1}) == {'a': '1'}
 
 
-def test_numeric_to_numeric_converter():
+def test_integer_to_integer_converter():
     schema = schematec.schema.Schema(
-        a=[converters.numeric]
+        a=[converters.integer]
     )
     assert schema({'a': 1}) == {'a': 1}
 
 
 def test_unbound_validator_required():
     schema = schematec.schema.Schema(
-        a=[validators.required, converters.numeric]
+        a=[validators.required, converters.integer]
     )
     assert schema({'a': '1'}) == {'a': 1}
 
 
 def test_unbound_validator_required_for_missed_value():
     schema = schematec.schema.Schema(
-        a=[validators.required, converters.numeric]
+        a=[validators.required, converters.integer]
     )
     with pytest.raises(exc.ValidationError):
         schema({})

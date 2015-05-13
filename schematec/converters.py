@@ -4,7 +4,7 @@ Convertaion rules
 
 Can be converted into:
 
-numeric
+integer
 -------
 
 #. Any int or long value
@@ -48,7 +48,7 @@ class Converter(object):
     pass
 
 
-class Numeric(Converter):
+class Integer(Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -67,7 +67,7 @@ class Numeric(Converter):
 
         raise exc.ConvertationError(value)
 
-numeric = Numeric()
+integer = Integer()
 
 
 class String(Converter):
