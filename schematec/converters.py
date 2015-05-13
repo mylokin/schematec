@@ -32,15 +32,15 @@ boolean
 #. '0' or '1'
 #. u'0' or u'1'
 
-array
------
-
-#. Any iterable value(collections.Iterable)
-
 dictionary
 ----------
 
 #. Any mapping value(collections.Mapping)
+
+array
+-----
+
+#. Any iterable value(collections.Iterable), but not a mapping
 
 
 '''
@@ -142,7 +142,7 @@ boolean = Boolean()
 
 class Array(abc.Converter):
     def __call__(self, value):
-        if isinstance(value, collections.Iterable):
+        if isinstance(value, collections.Iterable) and not isinstance(value, collections.Mapping):
             return list(value)
 
         raise exc.ConvertationError(value)

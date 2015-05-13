@@ -20,7 +20,8 @@ def test_empty_tuple():
 
 
 def test_empty_dict():
-    assert converters.array({}) == []
+    with pytest.raises(exc.ConvertationError):
+        converters.array({})
 
 
 def test_empty_str():
@@ -40,7 +41,8 @@ def test_full_tuple():
 
 
 def test_full_dict():
-    assert converters.array({0: '0', 1: '1'}) == [0, 1]
+    with pytest.raises(exc.ConvertationError):
+        converters.array({0: '0', 1: '1'})
 
 
 def test_full_str():
