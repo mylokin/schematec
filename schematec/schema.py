@@ -10,8 +10,6 @@ class Dictionary(object):
     Converters is appliyed second in orderder they defined
     Bound validators is appliyed third.
     '''
-    TYPE = schematec.converters.dictionary
-
     def __init__(self, **descriptors):
         self.descriptors = descriptors
 
@@ -43,5 +41,30 @@ class Dictionary(object):
 
         return result
 
-
 dictionary = Dictionary
+
+
+class Array(object):
+    '''
+    Converters is appliyed first in orderder they defined
+    Bound validators is appliyed second.
+    '''
+    def __init__(self, *descriptors):
+        self.descriptors = descriptors
+
+    def __call__(self, data):
+        data = schematec.converters.array(data)
+
+        converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
+        for converter in converters:
+            data = map(converter, data)
+
+        bound_validators = [v for v in self.descriptors if isinstance(v, abc.Validator) and v.BINDING]
+        for validator in bound_validators:
+            for value in data:
+                if isinstance(value, validator.BINDING):
+                    validator(value)
+
+        return data
+
+array = Array
