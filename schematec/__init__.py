@@ -50,8 +50,6 @@ Module `implements <https://github.com/ambitioninc/django-data-schema/blob/devel
 data converters.
 
 '''
-__version__ = '0.2.0'
-
 from .converters import (
     integer,
     number,
@@ -80,3 +78,5 @@ __all__ = [
     'array',
     'dictionary',
 ]
+
+__version__ = '0.3.0'
