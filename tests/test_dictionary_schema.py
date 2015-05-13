@@ -9,45 +9,45 @@ import schematec.exc as exc
 
 
 def test_empty_schema_with_empty_value():
-    schema = schematec.schema.Schema()
+    schema = schematec.schema.dictionary()
     assert schema({}) == {}
 
 
 def test_empty_schema_with_non_empty_value():
-    schema = schematec.schema.Schema()
+    schema = schematec.schema.dictionary()
     assert schema({'a': 1}) == {}
 
 
 def test_schema_with_missed_keys():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[converters.string]
     )
     assert schema({'b': 1}) == {}
 
 
 def test_integer_to_string_converter():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[converters.string]
     )
     assert schema({'a': 1}) == {'a': '1'}
 
 
 def test_integer_to_integer_converter():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[converters.integer]
     )
     assert schema({'a': 1}) == {'a': 1}
 
 
 def test_unbound_validator_required():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.integer]
     )
     assert schema({'a': '1'}) == {'a': 1}
 
 
 def test_unbound_validator_required_for_missed_value():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.integer]
     )
     with pytest.raises(exc.ValidationError):
@@ -55,14 +55,14 @@ def test_unbound_validator_required_for_missed_value():
 
 
 def test_unbound_validator_required_without_converter():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required]
     )
     assert schema({'a': 1}) == {'a': 1}
 
 
 def test_unbound_validator_required_for_missed_without_converter():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required]
     )
     with pytest.raises(exc.ValidationError):
@@ -70,21 +70,21 @@ def test_unbound_validator_required_for_missed_without_converter():
 
 
 def test_bound_validator_skipped():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.length(3)]
     )
     assert schema({'a': 1}) == {'a': 1}
 
 
 def test_bound_validator():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.length(3)]
     )
     assert schema({'a': '1'}) == {'a': '1'}
 
 
 def test_bound_validator_error():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.length(3)]
     )
     with pytest.raises(exc.ValidationError):
@@ -92,7 +92,7 @@ def test_bound_validator_error():
 
 
 def test_schema_with_converters_and_validators():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.string, validators.length(3)]
     )
 
@@ -100,7 +100,7 @@ def test_schema_with_converters_and_validators():
 
 
 def test_schema_with_converters_and_validators_fail_on_required():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.string, validators.length(3)]
     )
 
@@ -109,7 +109,7 @@ def test_schema_with_converters_and_validators_fail_on_required():
 
 
 def test_schema_with_converters_and_validators_fail_on_convertation():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.string, validators.length(3)]
     )
 
@@ -118,7 +118,7 @@ def test_schema_with_converters_and_validators_fail_on_convertation():
 
 
 def test_schema_with_converters_and_validators_fail_on_length():
-    schema = schematec.schema.Schema(
+    schema = schematec.schema.dictionary(
         a=[validators.required, converters.string, validators.length(3)]
     )
 
