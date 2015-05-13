@@ -4,7 +4,7 @@ import schematec.abc as abc
 import schematec.converters
 
 
-class Dictionary(object):
+class Dictionary(abc.Schema):
     '''
     Unbound validators is appliyed first.
     Converters is appliyed second in orderder they defined
@@ -47,7 +47,7 @@ class Dictionary(object):
 dictionary = Dictionary
 
 
-class Array(object):
+class Array(abc.Schema):
     '''
     Converters is appliyed first in orderder they defined
     Bound validators is appliyed second.
