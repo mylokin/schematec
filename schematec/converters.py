@@ -144,8 +144,10 @@ boolean = Boolean()
 
 
 class Array(Converter):
+    TYPE = collections.Iterable
+
     def __call__(self, value):
-        if isinstance(value, collections.Iterable):
+        if isinstance(value, self.TYPE):
             return list(value)
 
         raise exc.ConvertationError(value)
@@ -154,8 +156,10 @@ array = Array()
 
 
 class Dictionary(Converter):
+    TYPE = collections.Mapping
+
     def __call__(self, value):
-        if isinstance(value, collections.Mapping):
+        if isinstance(value, self.TYPE):
             return dict(value)
 
         raise exc.ConvertationError(value)
