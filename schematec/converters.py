@@ -145,9 +145,6 @@ boolean = Boolean()
 
 class Array(Converter):
     def __call__(self, value):
-        if value is None:
-            raise exc.ConvertationError(value)
-
         if isinstance(value, collections.Iterable):
             return list(value)
 
@@ -158,9 +155,6 @@ array = Array()
 
 class Dictionary(Converter):
     def __call__(self, value):
-        if value is None:
-            raise exc.ConvertationError(value)
-
         if isinstance(value, collections.Mapping):
             return dict(value)
 
