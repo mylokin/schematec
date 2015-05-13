@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+import schematec.abc
 import schematec.converters
 import schematec.validators
 
@@ -17,17 +18,17 @@ class Schema(object):
         result = {}
         for name, descriptors in self.descriptors.items():
             unbound_validators = [v for v in descriptors if
-                                  isinstance(v, schematec.validators.Validator) and not v.BINDING]
+                                  isinstance(v, schematec.abc.Validator) and not v.BINDING]
             for validator in unbound_validators:
                 validator(name, data)
             try:
                 value = data[name]
             except KeyError:
                 continue
-            converters = [c for c in descriptors if isinstance(c, schematec.converters.Converter)]
+            converters = [c for c in descriptors if isinstance(c, schematec.abc.Converter)]
             for converter in converters:
                 value = converter(value)
-            bound_validators = [v for v in descriptors if isinstance(v, schematec.validators.Validator) and v.BINDING]
+            bound_validators = [v for v in descriptors if isinstance(v, schematec.abc.Validator) and v.BINDING]
             for validator in bound_validators:
                 if isinstance(value, validator.BINDING):
                     validator(value)

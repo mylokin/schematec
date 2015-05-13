@@ -49,13 +49,10 @@ from __future__ import absolute_import
 import collections
 
 import schematec.exc as exc
+import schematec.abc as abc
 
 
-class Converter(object):
-    pass
-
-
-class Integer(Converter):
+class Integer(abc.Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -77,7 +74,7 @@ class Integer(Converter):
 integer = Integer()
 
 
-class Number(Converter):
+class Number(abc.Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -99,7 +96,7 @@ class Number(Converter):
 number = Number()
 
 
-class String(Converter):
+class String(abc.Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -124,7 +121,7 @@ class String(Converter):
 string = String()
 
 
-class Boolean(Converter):
+class Boolean(abc.Converter):
     def __call__(self, value):
         if value is None:
             raise exc.ConvertationError(value)
@@ -143,7 +140,7 @@ class Boolean(Converter):
 boolean = Boolean()
 
 
-class Array(Converter):
+class Array(abc.Converter):
     TYPE = collections.Iterable
 
     def __call__(self, value):
@@ -155,7 +152,7 @@ class Array(Converter):
 array = Array()
 
 
-class Dictionary(Converter):
+class Dictionary(abc.Converter):
     TYPE = collections.Mapping
 
     def __call__(self, value):
