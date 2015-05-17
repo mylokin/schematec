@@ -22,6 +22,9 @@ class Dictionary(abc.Schema):
         result = {}
 
         for name, descriptors in self.descriptors.items():
+            if isinstance(descriptors, abc.IDescriptor):
+                descriptors = [descriptors]
+
             unbound_validators = [v for v in descriptors if
                                   isinstance(v, abc.Validator) and not v.BINDING]
             for validator in unbound_validators:

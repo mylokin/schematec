@@ -124,3 +124,11 @@ def test_schema_with_converters_and_validators_fail_on_length():
 
     with pytest.raises(exc.ValidationError):
         schema({'a': '1234'})
+
+
+def test_schema_with_only_one_descriptor():
+    schema = schematec.schema.dictionary(
+        a=converters.string,
+    )
+
+    assert schema({'a': 1234}) == {'a': '1234'}

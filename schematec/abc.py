@@ -1,13 +1,17 @@
 from __future__ import absolute_import
 
 
-class Schema(object):
+class IDescriptor(object):
     pass
 
 
-class Converter(object):
+class Schema(IDescriptor):
     pass
 
 
-class Validator(object):
+class Converter(IDescriptor):
+    pass
+
+
+class Validator(IDescriptor):
     BINDING = None
