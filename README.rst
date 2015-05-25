@@ -13,13 +13,24 @@ Quickstart
 
 .. code:: python
 
-   import schematec as stc
+   import schematec as s
 
    schema = s.dictionary(
       id=[s.integer, s.required],
       name=s.string,
       tags=s.array(s.string),
    )
+
+.. code:: python
+
+   >>> data = {
+   ...     'id': '1',
+   ...     'name': 'Red Hot Chili Peppers',
+   ...     'tags': ['funk', 'rock'],
+   ...     'rank': '1',
+   ... }
+   >>> schema(data)
+   {'id': 1, 'name': u'Red Hot Chili Peppers', 'tags': [u'funk', u'rock']}
 
 
 Concepts
