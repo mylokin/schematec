@@ -73,12 +73,8 @@ There are two types of validators in schematec:
 Converter
 ^^^^^^^^^
 
-Term "converter" is used to describe cast functions.
-
-Supported Data Types
-====================
-
-Schematec supports subset of JSON data types:
+Term "converter" is used to describe cast functions. Schematec supports subset of JSON
+data types.
 
 Basic types:
 
