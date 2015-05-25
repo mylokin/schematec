@@ -8,6 +8,20 @@ Schematec is a set of tools that makes input data validation easier.
 The purpose of this code is attempt to bring simplicity to applications
 logics using separation of data validation and actual data processing.
 
+Quickstart
+----------
+
+::
+
+   import schematec as stc
+
+   schema = s.dictionary(
+      id=[s.integer, s.required],
+      name=s.string,
+      tags=s.array(s.string),
+   )
+
+
 Concepts
 --------
 
