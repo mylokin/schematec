@@ -3,7 +3,15 @@
 Changelog
 ---------
 
-0.1.0
+0.3.1 (2015-05-25)
+++++++++++++++++++
+
+- Add array schemas
+- Add dictionary schemas
+- Add recursive schemas support
+- Add strict schemas
+
+0.1.0 (2015-05-01)
 ++++++++++++++++++
 
 - Initial version
