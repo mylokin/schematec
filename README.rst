@@ -70,6 +70,8 @@ There are two types of validators in schematec:
 * Bound - type related, for example "max length" validator is bound to sized type.
 * Unbound - universal, for example "required" validator.
 
+Raises `schematec.exc.ValidationError`.
+
 Converter
 ^^^^^^^^^
 
@@ -86,3 +88,9 @@ Containers:
 
 - array(list)
 - dictionary(dict)
+
+Raises `schematec.exc.ConvertationError`.
+
+Examples
+========
+
