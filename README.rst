@@ -1,6 +1,9 @@
 Schematec
 =========
 
+.. image:: https://travis-ci.org/mylokin/redisext.svg?branch=master
+   :target: https://travis-ci.org/mylokin/redisext
+
 Schematec is a set of tools that brings some static typing into Python and
 makes input data validation easier. The purpose of this code is attempt to
 bring simplicity to applications logics using separation of data validation
