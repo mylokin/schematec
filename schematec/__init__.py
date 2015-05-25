@@ -67,6 +67,12 @@ from .schema import (
     dictionary,
 )
 
+from .exc import (
+    SchematecError,
+    ConvertationError,
+    ValidationError,
+    SchemaError,
+)
 
 __all__ = [
     'integer',
@@ -77,6 +83,10 @@ __all__ = [
     'length',
     'array',
     'dictionary',
+    'SchematecError',
+    'ConvertationError',
+    'ValidationError',
+    'SchemaError',
 ]
 
 __version__ = '0.3.0'
