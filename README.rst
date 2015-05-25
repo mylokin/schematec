@@ -42,93 +42,38 @@ Schematec module is based on three basic concepts:
 * Validator
 * Converter
 
-Workflow
---------
+Schema
+^^^^^^
 
-Schematec determine validity of data using following criterias:
+Term "schema" is used to describe complex data struct such as dictionary(hashmap)
+or array(list). Schemas has two different types of validation (it is not related to
+array schemas):
 
-#. Existence (schema validator)
-#. Type (converter)
-#. Suitability (validator)
+* Strict - requires all values
+* Non-strict - tolerate to missed values
 
-Example:
+`schematec.exc.SchemaError` is raised in case provided data is incorrect.
 
-.. code:: python
+Order of schema validations:
 
-   a = string and email and required
-
-   ### Cases
-
-   {'a': 'mylokin@me.com'}  # valid
-   {'a': 'mylokin'}  # invalid by suitability
-   {'a': ''}  # invalid by suitability
-   {'a': 1}  # invalid by suitability
-   {'a': None}  # invalid by type
-   {'a': []}  # invalid by type
-   {}  # invalid by existence
-
-   a = string and email
-
-   ### Cases
-
-   {'a': 'mylokin@me.com'}  # valid
-   {'a': 'mylokin'}  # invalid by suitability
-   {'a': ''}  # invalid by suitability
-   {'a': 1}  # invalid by suitability
-   {'a': None}  # invalid by type
-   {'a': []}  # invalid by type
-   {}  # valid
-
-   a = string
-
-   ### Cases
-
-   {'a': 'mylokin@me.com'}  # valid
-   {'a': 'mylokin'}  # valid
-   {'a': ''}  # valid
-   {'a': 1}  # valid
-   {'a': None}  # invalid by type
-   {'a': []}  # invalid by type
-   {}  # valid
-
-
-Glossary
-========
+#. Unbound Validators
+#. Schemas(inner)
+#. Converters
+#. Bound Validators
 
 Validator
+^^^^^^^^^
 
-   Configurable object that checks object for predefined conditions.
+Term "validator" describes callable objects that perform different types of checks.
+There are two types of validators in schematec:
+
+* Bound - type related, for example "max length" validator is bound to sized type.
+* Unbound - universal, for example "required" validator.
 
 Converter
+^^^^^^^^^
 
-   Converter casts input object to required type if possible.
-
-Schema
-
-   Set of validators
-
-Validation
-
-   Checking process where every value validated through set of validators.
-
-Validators
-==========
-
-Required -- any
-
-   Required value, (everything is optional by default).
-
-Regex (URL, Email, IPAddress) -- string
-
-    String contains expected value.
-
-Range -- integer
-
-    Integer within range
-
-Length -- string, array, dictionary
-
-    Length of iteratable is appropriate.
+Term "converter" is used to describe cast functions.
 
 Supported Data Types
 ====================
@@ -145,16 +90,3 @@ Containers:
 
 - array(list)
 - dictionary(dict)
-
-Extended Data Types
-===================
-
-- datetime - based on str
-- regexp str - based on str
-
-Order of schema check
-=====================
-
-#. Unbound Validators
-#. Converters
-#. Bound Validators
