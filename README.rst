@@ -94,3 +94,64 @@ Raises `schematec.exc.ConvertationError`.
 Examples
 ========
 
+Recursive schema
+----------------
+
+.. code:: python
+
+   import schematec as s
+
+   schema = s.dictionary(
+       id=[s.integer, s.required],
+       entity=s.dictionary(
+           name=[s.string, s.required],
+           value=s.string,
+       )
+   )
+
+.. code:: python
+
+   >>> data = {
+   ...     'id': 1,
+   ...     'entity': {
+   ...         'name': 'song',
+   ...         'value': 'californication',
+   ...     }
+   ... }
+   >>> schema(data)
+   {'id': 1, 'entity': {'name': u'song', 'value': u'californication'}}
+
+
+Errors handling
+---------------
+
+.. code:: python
+
+   import schematec as s
+
+   schema = s.dictionary(
+       id=[s.integer, s.required],
+       entity=s.dictionary(
+           name=[s.string, s.required],
+           value=s.string,
+       )
+   )
+
+.. code:: python
+
+   >>> data = {
+   ...     'id': 1,
+   ...     'entity': {
+   ...         'value': 'californication',
+   ...     }
+   ... }
+   >>> schema(data)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+     File "schematec/schema.py", line 44, in __call__
+       value = schema(value, strict=strict)
+     File "schematec/schema.py", line 32, in __call__
+       validator(name, data)
+     File "schematec/validators.py", line 12, in __call__
+       raise exc.ValidationError(name)
+   schematec.exc.ValidationError: name
