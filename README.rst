@@ -11,7 +11,7 @@ logics using separation of data validation and actual data processing.
 Quickstart
 ----------
 
-::
+.. code:: python
 
    import schematec as stc
 
