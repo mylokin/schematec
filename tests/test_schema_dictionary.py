@@ -132,3 +132,45 @@ def test_schema_with_only_one_descriptor():
     )
 
     assert schema({'a': 1234}) == {'a': '1234'}
+
+
+def test_strict_schema_success():
+    schema = schematec.dictionary(
+        a=converters.string,
+        b=converters.string,
+    )
+
+    assert schema({'a': 1234}) == {'a': '1234'}
+
+
+def test_strict_schema_fail():
+    schema = schematec.dictionary(
+        a=converters.string,
+        b=converters.string,
+    )
+
+    with pytest.raises(exc.SchemaError):
+        schema({'a': 1234}, strict=True)
+
+
+def test_strict_schema_recursive_fail():
+    schema = schematec.dictionary(
+        a=schematec.dictionary(
+            b=converters.string,
+        )
+    )
+
+    with pytest.raises(exc.SchemaError):
+        schema({'a': {}}, strict=True)
+
+
+def test_strict_schema_recursive_list_fail():
+    schema = schematec.dictionary(
+        a=schematec.array(schematec.dictionary(
+            b=converters.integer,
+            c=converters.integer,
+        ))
+    )
+
+    with pytest.raises(exc.SchemaError):
+        schema({'a': [{'b': 1, 'c': 1}, {'b': 1}]}, strict=True)

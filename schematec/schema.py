@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 import schematec.abc as abc
 import schematec.converters
+import schematec.exc as exc
 
 
 class Dictionary(abc.Schema):
@@ -13,7 +14,7 @@ class Dictionary(abc.Schema):
     def __init__(self, **descriptors):
         self.descriptors = descriptors
 
-    def __call__(self, data):
+    def __call__(self, data, strict=False):
         data = schematec.converters.dictionary(data)
 
         if not self.descriptors:
@@ -33,11 +34,14 @@ class Dictionary(abc.Schema):
             try:
                 value = data[name]
             except KeyError:
-                continue
+                if strict:
+                    raise exc.SchemaError(name)
+                else:
+                    continue
 
             schemas = [s for s in descriptors if isinstance(s, abc.Schema)]
             for schema in schemas:
-                value = schema(value)
+                value = schema(value, strict=strict)
 
             converters = [c for c in descriptors if isinstance(c, abc.Converter)]
             for converter in converters:
@@ -62,7 +66,7 @@ class Array(abc.Schema):
     def __init__(self, *descriptors):
         self.descriptors = descriptors
 
-    def __call__(self, data):
+    def __call__(self, data, strict=False):
         data = schematec.converters.array(data)
 
         if not self.descriptors:
@@ -70,7 +74,7 @@ class Array(abc.Schema):
 
         schemas = [s for s in self.descriptors if isinstance(s, abc.Schema)]
         for schema in schemas:
-            data = map(schema, data)
+            data = [schema(d, strict=strict) for d in data]
 
         converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
         for converter in converters:
