@@ -24,7 +24,9 @@ class Dictionary(abc.Schema):
 
         for name, descriptors in self.descriptors.items():
             if isinstance(descriptors, abc.IDescriptor):
-                descriptors = [descriptors]
+                descriptor, descriptors = descriptors, [descriptors]
+                if isinstance(descriptor, abc.SyntaxSugarMixin) and descriptor.has_sugar_descriptors():
+                    descriptors = [descriptor] + descriptor.get_sugar_descriptors()
 
             unbound_validators = [v for v in descriptors if
                                   isinstance(v, abc.Validator) and not v.BINDING]

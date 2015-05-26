@@ -155,3 +155,19 @@ Errors handling
      File "schematec/validators.py", line 12, in __call__
        raise exc.ValidationError(name)
    schematec.exc.ValidationError: name
+
+
+Sugar descriptors
+-----------------
+
+.. code:: python
+
+   import schematec as s
+
+   schema = s.dictionary(
+       id=s.integer & s.required,
+       entity=s.dictionary(
+           name=s.string & s.required,
+           value=s.string,
+       )
+   )

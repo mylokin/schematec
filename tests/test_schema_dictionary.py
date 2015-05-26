@@ -174,3 +174,20 @@ def test_strict_schema_recursive_list_fail():
 
     with pytest.raises(exc.SchemaError):
         schema({'a': [{'b': 1, 'c': 1}, {'b': 1}]}, strict=True)
+
+
+def test_sugar_descriptors_fail():
+    schema = schematec.dictionary(
+        a=schematec.string & schematec.required,
+    )
+
+    with pytest.raises(exc.ValidationError):
+        schema({})
+
+
+def test_sugar_descriptors_success():
+    schema = schematec.dictionary(
+        a=schematec.string & schematec.required,
+    )
+
+    assert schema({'a': 1}) == {'a': '1'}
