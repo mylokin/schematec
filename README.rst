@@ -91,6 +91,47 @@ Containers:
 
 Raises `schematec.exc.ConvertationError`.
 
+Convertation rules
+=================
+
+integer
+-------
+
+#. Any int or long value
+#. Any suitable string/unicode
+#. Boolean value
+
+number
+-------
+
+#. Any float or int or long value
+#. Any suitable string/unicode
+#. Boolean value
+
+string
+------
+
+#. Any suitable string/unicode
+#. Any int or long value
+
+boolean
+-------
+
+#. Boolean value
+#. 0 or 1
+#. '0' or '1'
+#. u'0' or u'1'
+
+dictionary
+----------
+
+#. Any mapping value(collections.Mapping)
+
+array
+-----
+
+#. Any iterable value(collections.Iterable), but not a mapping
+
 Complex Descriptors
 ===================
 
