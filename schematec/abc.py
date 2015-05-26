@@ -2,6 +2,12 @@ from __future__ import absolute_import
 
 
 class AbstractDescriptor(object):
+    def __init__(self):
+        pass
+
+    def __call__(self, *args, **kw):
+        raise NotImplementedError
+
     def has_sugar_descriptors(self):
         return hasattr(self, '_sugar_descriptors')
 
