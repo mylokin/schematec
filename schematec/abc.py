@@ -2,10 +2,6 @@ from __future__ import absolute_import
 
 
 class IDescriptor(object):
-    pass
-
-
-class SyntaxSugarMixin(object):
     def has_sugar_descriptors(self):
         return hasattr(self, '_sugar_descriptors')
 
@@ -13,9 +9,6 @@ class SyntaxSugarMixin(object):
         return self._sugar_descriptors
 
     def __and__(self, other):
-        if not isinstance(other, IDescriptor):
-            return super(SyntaxSugarMixin, self).__add__(other)
-
         if not self.has_sugar_descriptors():
             self._sugar_descriptors = [other]
 
@@ -23,13 +16,13 @@ class SyntaxSugarMixin(object):
         return self
 
 
-class Schema(SyntaxSugarMixin, IDescriptor):
+class Schema(IDescriptor):
     pass
 
 
-class Converter(SyntaxSugarMixin, IDescriptor):
+class Converter(IDescriptor):
     pass
 
 
-class Validator(SyntaxSugarMixin, IDescriptor):
+class Validator(IDescriptor):
     BINDING = None
