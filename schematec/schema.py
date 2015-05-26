@@ -56,10 +56,6 @@ dictionary = Dictionary
 
 
 class Array(abc.Schema):
-    '''
-    Converters is appliyed first in orderder they defined
-    Bound validators is appliyed second.
-    '''
     def __init__(self, *descriptors):
         self.descriptors = descriptors
 
