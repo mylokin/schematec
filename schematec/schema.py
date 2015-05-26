@@ -18,7 +18,7 @@ class Dictionary(abc.Schema):
         result = {}
 
         for name, descriptors in self.descriptors.items():
-            if isinstance(descriptors, abc.IDescriptor):
+            if isinstance(descriptors, abc.AbstractDescriptor):
                 descriptor, descriptors = descriptors, [descriptors]
                 if descriptor.has_sugar_descriptors():
                     descriptors = [descriptor] + descriptor.get_sugar_descriptors()

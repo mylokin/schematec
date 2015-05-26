@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 
-class IDescriptor(object):
+class AbstractDescriptor(object):
     def has_sugar_descriptors(self):
         return hasattr(self, '_sugar_descriptors')
 
@@ -16,13 +16,13 @@ class IDescriptor(object):
         return self
 
 
-class Schema(IDescriptor):
+class Schema(AbstractDescriptor):
     pass
 
 
-class Converter(IDescriptor):
+class Converter(AbstractDescriptor):
     pass
 
 
-class Validator(IDescriptor):
+class Validator(AbstractDescriptor):
     BINDING = None
