@@ -15,14 +15,14 @@ def test_list_in_list():
 
 def test_list_in_dict():
     schema = schematec.schema.dictionary(
-        a=[schematec.schema.array(converters.string)],
+        a=schematec.schema.array(converters.string),
     )
     assert schema({'a': [1, 2]}) == {'a': ['1', '2']}
 
 
 def test_list_in_dict_required():
     schema = schematec.schema.dictionary(
-        a=[schematec.schema.array(converters.string), validators.required],
+        a=schematec.schema.array(converters.string) & validators.required,
     )
     with pytest.raises(exc.ValidationError):
         schema({'b': [1, 2]})
@@ -30,18 +30,18 @@ def test_list_in_dict_required():
 
 def test_dict_in_dict():
     schema = schematec.schema.dictionary(
-        a=[schematec.schema.dictionary(
-            b=[converters.string],
-        )],
+        a=schematec.schema.dictionary(
+            b=converters.string,
+        ),
     )
     assert schema({'a': {'b': 1}}) == {'a': {'b': '1'}}
 
 
 def test_dict_in_dict_required():
     schema = schematec.schema.dictionary(
-        a=[schematec.schema.dictionary(
-            b=[converters.string, validators.required],
-        )],
+        a=schematec.schema.dictionary(
+            b=converters.string & validators.required,
+        ),
     )
     with pytest.raises(exc.ValidationError):
         schema({'a': {'c': 1}})
@@ -49,6 +49,6 @@ def test_dict_in_dict_required():
 
 def test_dict_in_list():
     schema = schematec.schema.array(schematec.schema.dictionary(
-        a=[converters.string],
+        a=converters.string,
     ))
     assert schema([{'a': 1}, {'a': 2}]) == [{'a': '1'}, {'a': '2'}]

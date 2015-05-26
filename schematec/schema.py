@@ -19,9 +19,11 @@ class Dictionary(abc.Schema):
 
         for name, descriptors in self.descriptors.items():
             if isinstance(descriptors, abc.AbstractDescriptor):
-                descriptor, descriptors = descriptors, [descriptors]
-                if descriptor.has_sugar_descriptors():
-                    descriptors = [descriptor] + descriptor.get_sugar_descriptors()
+                descriptors = [descriptors]
+            elif isinstance(descriptors, abc.ComplexDescriptor):
+                descriptors = list(descriptors)
+            else:
+                raise TypeError(descriptors)
 
             unbound_validators = [v for v in descriptors if
                                   isinstance(v, abc.Validator) and not v.BINDING]
@@ -57,7 +59,16 @@ dictionary = Dictionary
 
 class Array(abc.Schema):
     def __init__(self, *descriptors):
-        self.descriptors = descriptors
+        if descriptors:
+            descriptors = descriptors[0]
+            if isinstance(descriptors, abc.AbstractDescriptor):
+                self.descriptors = [descriptors]
+            elif isinstance(descriptors, abc.ComplexDescriptor):
+                self.descriptors = list(descriptors)
+            else:
+                raise TypeError(descriptors)
+        else:
+            self.descriptors = []
 
     def __call__(self, data, strict=False):
         data = schematec.converters.array(data)

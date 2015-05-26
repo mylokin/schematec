@@ -1,6 +1,22 @@
 from __future__ import absolute_import
 
 
+class ComplexDescriptor(object):
+    def __init__(self, *descriptors):
+        self.descriptors = list(descriptors)
+
+    def __and__(self, descriptor):
+        if not isinstance(descriptor, AbstractDescriptor):
+            raise TypeError(descriptor)
+
+        self.descriptors.append(descriptor)
+        return self
+
+    def __iter__(self):
+        for descriptor in self.descriptors:
+            yield descriptor
+
+
 class AbstractDescriptor(object):
     def __init__(self):
         pass
@@ -8,18 +24,11 @@ class AbstractDescriptor(object):
     def __call__(self, *args, **kw):
         raise NotImplementedError
 
-    def has_sugar_descriptors(self):
-        return hasattr(self, '_sugar_descriptors')
+    def __and__(self, descriptor):
+        if not isinstance(descriptor, AbstractDescriptor):
+            raise TypeError(descriptor)
 
-    def get_sugar_descriptors(self):
-        return self._sugar_descriptors
-
-    def __and__(self, other):
-        if not self.has_sugar_descriptors():
-            self._sugar_descriptors = [other]
-
-        self._sugar_descriptors.append(other)
-        return self
+        return ComplexDescriptor(self, descriptor)
 
 
 class Schema(AbstractDescriptor):

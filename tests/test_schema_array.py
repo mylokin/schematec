@@ -50,27 +50,27 @@ def test_bound_validator_error():
 
 
 def test_schema_with_converters_and_validators():
-    schema = schematec.schema.array(converters.string, validators.length(3))
+    schema = schematec.schema.array(converters.string & validators.length(3))
 
     assert schema([123]) == ['123']
 
 
 def test_schema_with_converters_and_validators_fail_on_convertation():
-    schema = schematec.schema.array(converters.string, validators.length(3))
+    schema = schematec.schema.array(converters.string & validators.length(3))
 
     with pytest.raises(exc.ConvertationError):
         schema([None])
 
 
 def test_schema_with_converters_and_validators_fail_on_length():
-    schema = schematec.schema.array(converters.string, validators.length(3))
+    schema = schematec.schema.array(converters.string & validators.length(3))
 
     with pytest.raises(exc.ValidationError):
         schema(['1234'])
 
 
 def test_schema_with_converters_and_validators_fail_on_length_for_various_values():
-    schema = schematec.schema.array(converters.string, validators.length(3))
+    schema = schematec.schema.array(converters.string & validators.length(3))
 
     with pytest.raises(exc.ValidationError):
         schema(['123', '1234'])
