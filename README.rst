@@ -91,6 +91,19 @@ Containers:
 
 Raises `schematec.exc.ConvertationError`.
 
+Complex Descriptors
+===================
+
+"Schema", "validator" and "converter" are internally referenced as "descriptors". Common task is
+creation of complex validation rules for a field(or "complex descriptors"). To do this use bitwise
+"and" operator on descriptors:
+
+.. code:: python
+
+   >>> import schematec
+   >>> schematec.integer & schematec.required
+   <schematec.abc.ComplexDescriptor object at 0x10b05a0d0>
+
 Examples
 ========
 
