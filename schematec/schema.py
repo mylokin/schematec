@@ -109,5 +109,5 @@ def expand(schema):
         raise exc.SchemaError(schema)
 
 
-def process(schema, data):
-    return expand(schema)(data)
+def process(schema, data, strict=False):
+    return expand(schema)(data, strict=strict)
