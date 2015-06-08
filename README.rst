@@ -156,6 +156,26 @@ creation of complex validation rules for a field(or "complex descriptors"). To d
    >>> schematec.integer & schematec.required
    <schematec.abc.ComplexDescriptor object at 0x10b05a0d0>
 
+Sugar Schema
+============
+
+Schematec supports additional "magic" way to define your schemas. You can use simple dicts and lists
+to describe your data. For example:
+
+.. code:: python
+
+   >>> import schematec as s
+   >>> schema = {
+   ...     'a': [{
+   ...         'b': s.integer,
+   ...     }]
+   ... }
+   >>> data = {
+   ...     'a': [{'b': 1}, {'b': '1'}, {}]
+   ... }
+   >>> s.process(schema, data)
+   {'a': [{'b': 1}, {'b': 1}, {}]}
+
 Examples
 ========
 
