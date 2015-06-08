@@ -93,3 +93,19 @@ class Array(abc.Schema):
         return data
 
 array = Array
+
+
+class Schema(abc.Schema):
+    def __init__(self, schema):
+        self.schema = self.traversal(schema)
+
+    @classmethod
+    def traversal(cls, schema):
+        if isinstance(schema, (abc.AbstractDescriptor, abc.ComplexDescriptor)):
+            return schema
+        if isinstance(schema, dict):
+            return Dictionary(**{n: cls.traversal(d) for n, d in schema.items()})
+        if isinstance(schema, list):
+            return Array(cls.traversal(schema[0]))
+
+schema = Schema
