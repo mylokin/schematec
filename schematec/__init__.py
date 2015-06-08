@@ -8,6 +8,7 @@ from .converters import (
 from .validators import (
     required,
     length,
+    regex,
 )
 
 from .schema import (
@@ -29,6 +30,7 @@ __all__ = [
     'boolean',
     'required',
     'length',
+    'regex',
     'array',
     'dictionary',
     'SchematecError',
