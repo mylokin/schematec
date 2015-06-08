@@ -3,6 +3,12 @@
 Changelog
 ---------
 
+0.3.7
+++++++++++++++++++
+
+- Add simplifier for schema definition
+
+
 0.3.6 (2015-06-08)
 ++++++++++++++++++
 

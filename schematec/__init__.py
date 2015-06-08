@@ -14,6 +14,7 @@ from .validators import (
 from .schema import (
     array,
     dictionary,
+    process,
 )
 
 from .exc import (
@@ -33,6 +34,7 @@ __all__ = [
     'regex',
     'array',
     'dictionary',
+    'process',
     'SchematecError',
     'ConvertationError',
     'ValidationError',
