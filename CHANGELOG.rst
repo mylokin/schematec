@@ -3,10 +3,10 @@
 Changelog
 ---------
 
-0.3.7
+0.4.0 (2015-06-08)
 ++++++++++++++++++
 
-- Add simplifier for schema definition
+- Add sugar schemas
 
 
 0.3.6 (2015-06-08)
