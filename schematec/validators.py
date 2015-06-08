@@ -25,3 +25,16 @@ class Length(abc.Validator):
             raise exc.ValidationError(value)
 
 length = Length
+
+
+class Regex(abc.Validator):
+    BINDING = (str, )
+
+    def __init__(self, regex):
+        self.regex = regex
+
+    def __call__(self, value):
+        if not self.regex.match(value):
+            raise exc.ValidationError(value)
+
+regex = Regex

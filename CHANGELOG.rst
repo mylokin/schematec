@@ -3,7 +3,12 @@
 Changelog
 ---------
 
-0.3.5
+0.3.6 (2015-06-08)
+++++++++++++++++++
+
+- Add regex validator
+
+0.3.5 (2015-05-27)
 ++++++++++++++++++
 
 - Add complex descriptor
