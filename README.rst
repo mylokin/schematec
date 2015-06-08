@@ -72,6 +72,17 @@ There are two types of validators in schematec:
 
 Raises `schematec.exc.ValidationError`.
 
+Schematec provides following validators:
+
+required
+   check if value is provided
+
+length
+   check iterable for max length
+
+regex
+   check if given value is valid
+
 Converter
 ^^^^^^^^^
 
