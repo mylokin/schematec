@@ -1,7 +1,11 @@
 from __future__ import absolute_import
 
 
-class ComplexDescriptor(object):
+class Descriptor(object):
+    pass
+
+
+class ComplexDescriptor(Descriptor):
     def __init__(self, *descriptors):
         self.descriptors = list(descriptors)
 
@@ -17,7 +21,7 @@ class ComplexDescriptor(object):
             yield descriptor
 
 
-class AbstractDescriptor(object):
+class AbstractDescriptor(Descriptor):
     def __init__(self):
         pass
 
