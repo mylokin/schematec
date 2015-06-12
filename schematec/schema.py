@@ -38,13 +38,7 @@ class Dictionary(abc.Schema):
             for schema in descriptors.schemas:
                 value = schema(value, weak=weak)
 
-            for converter in descriptors.converters:
-                value = converter(value)
-
-            for validator in descriptors.bound_validators:
-                if isinstance(value, validator.BINDING):
-                    validator(value)
-            result[name] = value
+            result[name] = descriptors(value)
 
         return result
 
@@ -72,15 +66,7 @@ class Array(abc.Schema):
         for schema in self.descriptors.schemas:
             data = [schema(d, weak=weak) for d in data]
 
-        for converter in self.descriptors.converters:
-            data = map(converter, data)
-
-        for validator in self.descriptors.bound_validators:
-            for value in data:
-                if isinstance(value, validator.BINDING):
-                    validator(value)
-
-        return data
+        return map(self.descriptors, data)
 
 array = Array
 

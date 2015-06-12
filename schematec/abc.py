@@ -40,6 +40,16 @@ class ComplexDescriptor(Descriptor, collections.Sequence):
     def __len__(self):
         return len(self.descriptors)
 
+    def __call__(self, value):
+        for converter in self.converters:
+            value = converter(value)
+
+        for validator in self.bound_validators:
+            if isinstance(value, validator.BINDING):
+                validator(value)
+
+        return value
+
 
 class AbstractDescriptor(Descriptor):
     def __init__(self):
