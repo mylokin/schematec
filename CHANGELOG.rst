@@ -3,7 +3,13 @@
 Changelog
 ---------
 
-0.4.1 (2015-06-08)
+0.5.0 (2015-06-12)
+++++++++++++++++++
+
+- Replace strict schema validation with weak schema validation
+
+
+0.4.1 (2015-06-11)
 ++++++++++++++++++
 
 - Added base class for descriptors
