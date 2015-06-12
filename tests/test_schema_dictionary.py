@@ -134,46 +134,44 @@ def test_schema_with_only_one_descriptor():
     assert schema({'a': 1234}) == {'a': '1234'}
 
 
-def test_strict_schema_success():
+def test_weak_schema_success():
     schema = schematec.dictionary(
         a=converters.string,
         b=converters.string,
     )
 
-    assert schema({'a': 1234}) == {'a': '1234'}
+    assert schema({'a': 1234}, weak=True) == {'a': '1234'}
 
 
-def test_strict_schema_fail():
+def test_weak_schema_missed_value_success():
     schema = schematec.dictionary(
         a=converters.string,
-        b=converters.string,
+        b=converters.string & validators.required,
     )
 
-    with pytest.raises(exc.SchemaError):
-        schema({'a': 1234}, strict=True)
+    assert schema({'a': 1234}, weak=True) == {'a': '1234'}
 
 
-def test_strict_schema_recursive_fail():
+def test_weak_schema_recursive_success():
     schema = schematec.dictionary(
         a=schematec.dictionary(
-            b=converters.string,
+            b=converters.string & validators.required,
         )
     )
 
-    with pytest.raises(exc.SchemaError):
-        schema({'a': {}}, strict=True)
+    assert schema({'a': {}}, weak=True) == {'a': {}}
 
 
-def test_strict_schema_recursive_list_fail():
+def test_weak_schema_recursive_list_success():
     schema = schematec.dictionary(
         a=schematec.array(schematec.dictionary(
             b=converters.integer,
-            c=converters.integer,
+            c=converters.integer & validators.required,
         ))
     )
 
-    with pytest.raises(exc.SchemaError):
-        schema({'a': [{'b': 1, 'c': 1}, {'b': 1}]}, strict=True)
+    assert (schema({'a': [{'b': 1, 'c': 1}, {'b': 1}]}, weak=True) ==
+            {'a': [{'b': 1, 'c': 1}, {'b': 1}]})
 
 
 def test_sugar_descriptors_fail():
