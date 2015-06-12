@@ -3,11 +3,15 @@
 Changelog
 ---------
 
+0.5.1 (2015-06-12)
+++++++++++++++++++
+
+- Update internals of complex descriptor
+
 0.5.0 (2015-06-12)
 ++++++++++++++++++
 
 - Replace strict schema validation with weak schema validation
-
 
 0.4.1 (2015-06-11)
 ++++++++++++++++++
