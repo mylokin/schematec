@@ -3,6 +3,11 @@
 Changelog
 ---------
 
+0.5.2 (2015-06-12)
+++++++++++++++++++
+
+- Extract schema validation into complex descriptor
+
 0.5.1 (2015-06-12)
 ++++++++++++++++++
 
