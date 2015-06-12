@@ -234,7 +234,7 @@ Errors handling
    Traceback (most recent call last):
      File "<stdin>", line 1, in <module>
      File "schematec/schema.py", line 44, in __call__
-       value = schema(value, strict=strict)
+       value = schema(value, weak=weak)
      File "schematec/schema.py", line 32, in __call__
        validator(name, data)
      File "schematec/validators.py", line 12, in __call__
