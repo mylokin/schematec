@@ -49,8 +49,8 @@ Term "schema" is used to describe complex data struct such as dictionary(hashmap
 or array(list). Schemas has two different types of validation (it is not related to
 array schemas):
 
-* Strict - requires all values
-* Non-strict - tolerate to missed values
+* Default - Only values with required validator are required, other values are optional
+* Weak - All values are optional
 
 `schematec.exc.SchemaError` is raised in case provided data is incorrect.
 
