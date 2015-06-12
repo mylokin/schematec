@@ -24,8 +24,7 @@ class Dictionary(abc.Schema):
                 raise TypeError(descriptors)
 
             if not weak:
-                unbound_validators = [v for v in descriptors if isinstance(v, abc.UnboundValidator)]
-                for validator in unbound_validators:
+                for validator in descriptors.unbound_validators:
                     validator(name, data)
 
             if name not in data:
@@ -36,16 +35,13 @@ class Dictionary(abc.Schema):
             except KeyError:
                 raise exc.SchemaError(name)
 
-            schemas = [s for s in descriptors if isinstance(s, abc.Schema)]
-            for schema in schemas:
+            for schema in descriptors.schemas:
                 value = schema(value, weak=weak)
 
-            converters = [c for c in descriptors if isinstance(c, abc.Converter)]
-            for converter in converters:
+            for converter in descriptors.converters:
                 value = converter(value)
 
-            bound_validators = [v for v in descriptors if isinstance(v, abc.BoundValidator)]
-            for validator in bound_validators:
+            for validator in descriptors.bound_validators:
                 if isinstance(value, validator.BINDING):
                     validator(value)
             result[name] = value
@@ -73,16 +69,13 @@ class Array(abc.Schema):
         if not self.descriptors:
             return data
 
-        schemas = [s for s in self.descriptors if isinstance(s, abc.Schema)]
-        for schema in schemas:
+        for schema in self.descriptors.schemas:
             data = [schema(d, weak=weak) for d in data]
 
-        converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
-        for converter in converters:
+        for converter in self.descriptors.converters:
             data = map(converter, data)
 
-        bound_validators = [v for v in self.descriptors if isinstance(v, abc.BoundValidator)]
-        for validator in bound_validators:
+        for validator in self.descriptors.bound_validators:
             for value in data:
                 if isinstance(value, validator.BINDING):
                     validator(value)

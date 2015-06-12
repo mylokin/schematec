@@ -11,6 +11,22 @@ class ComplexDescriptor(Descriptor, collections.Sequence):
     def __init__(self, *descriptors):
         self.descriptors = list(descriptors)
 
+    @property
+    def unbound_validators(self):
+        return [v for v in self.descriptors if isinstance(v, UnboundValidator)]
+
+    @property
+    def bound_validators(self):
+        return [v for v in self.descriptors if isinstance(v, BoundValidator)]
+
+    @property
+    def schemas(self):
+        return [s for s in self.descriptors if isinstance(s, Schema)]
+
+    @property
+    def converters(self):
+        return [c for c in self.descriptors if isinstance(c, Converter)]
+
     def __and__(self, descriptor):
         if not isinstance(descriptor, AbstractDescriptor):
             raise TypeError(descriptor)
