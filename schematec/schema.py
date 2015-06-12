@@ -9,7 +9,7 @@ class Dictionary(abc.Schema):
     def __init__(self, **descriptors):
         self.descriptors = descriptors
 
-    def __call__(self, data, strict=False):
+    def __call__(self, data, weak=False):
         data = schematec.converters.dictionary(data)
 
         if not self.descriptors:
@@ -25,22 +25,23 @@ class Dictionary(abc.Schema):
             else:
                 raise TypeError(descriptors)
 
-            unbound_validators = [v for v in descriptors if
-                                  isinstance(v, abc.Validator) and not v.BINDING]
-            for validator in unbound_validators:
-                validator(name, data)
+            if not weak:
+                unbound_validators = [v for v in descriptors if
+                                      isinstance(v, abc.Validator) and not v.BINDING]
+                for validator in unbound_validators:
+                    validator(name, data)
+
+            if name not in data:
+                continue
 
             try:
                 value = data[name]
             except KeyError:
-                if strict:
-                    raise exc.SchemaError(name)
-                else:
-                    continue
+                raise exc.SchemaError(name)
 
             schemas = [s for s in descriptors if isinstance(s, abc.Schema)]
             for schema in schemas:
-                value = schema(value, strict=strict)
+                value = schema(value, weak=weak)
 
             converters = [c for c in descriptors if isinstance(c, abc.Converter)]
             for converter in converters:
@@ -70,7 +71,7 @@ class Array(abc.Schema):
         else:
             self.descriptors = []
 
-    def __call__(self, data, strict=False):
+    def __call__(self, data, weak=False):
         data = schematec.converters.array(data)
 
         if not self.descriptors:
@@ -78,7 +79,7 @@ class Array(abc.Schema):
 
         schemas = [s for s in self.descriptors if isinstance(s, abc.Schema)]
         for schema in schemas:
-            data = [schema(d, strict=strict) for d in data]
+            data = [schema(d, weak=weak) for d in data]
 
         converters = [c for c in self.descriptors if isinstance(c, abc.Converter)]
         for converter in converters:
@@ -109,5 +110,5 @@ def expand(schema):
         raise exc.SchemaError(schema)
 
 
-def process(schema, data, strict=False):
-    return expand(schema)(data, strict=strict)
+def process(schema, data, weak=False):
+    return expand(schema)(data, weak=weak)
