@@ -1,11 +1,13 @@
 from __future__ import absolute_import
 
+import collections
+
 
 class Descriptor(object):
     pass
 
 
-class ComplexDescriptor(Descriptor):
+class ComplexDescriptor(Descriptor, collections.Sequence):
     def __init__(self, *descriptors):
         self.descriptors = list(descriptors)
 
@@ -16,9 +18,11 @@ class ComplexDescriptor(Descriptor):
         self.descriptors.append(descriptor)
         return self
 
-    def __iter__(self):
-        for descriptor in self.descriptors:
-            yield descriptor
+    def __getitem__(self, index):
+        return self.descriptors[index]
+
+    def __len__(self):
+        return len(self.descriptors)
 
 
 class AbstractDescriptor(Descriptor):

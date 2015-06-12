@@ -61,11 +61,10 @@ class Array(abc.Schema):
         if descriptors:
             descriptors = descriptors[0]
             if isinstance(descriptors, abc.AbstractDescriptor):
-                self.descriptors = [descriptors]
-            elif isinstance(descriptors, abc.ComplexDescriptor):
-                self.descriptors = list(descriptors)
-            else:
+                descriptors = abc.ComplexDescriptor(descriptors)
+            elif not isinstance(descriptors, abc.ComplexDescriptor):
                 raise TypeError(descriptors)
+            self.descriptors = descriptors
         else:
             self.descriptors = []
 
