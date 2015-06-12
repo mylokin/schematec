@@ -47,5 +47,9 @@ class Converter(AbstractDescriptor):
     pass
 
 
-class Validator(AbstractDescriptor):
+class UnboundValidator(AbstractDescriptor):
+    pass
+
+
+class BoundValidator(AbstractDescriptor):
     BINDING = None

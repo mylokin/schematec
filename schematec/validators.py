@@ -6,7 +6,7 @@ import schematec.exc as exc
 import schematec.abc as abc
 
 
-class Required(abc.Validator):
+class Required(abc.UnboundValidator):
     def __call__(self, name, data):
         if name not in data:
             raise exc.ValidationError(name)
@@ -14,7 +14,7 @@ class Required(abc.Validator):
 required = Required()
 
 
-class Length(abc.Validator):
+class Length(abc.BoundValidator):
     BINDING = (str, collections.Sized)
 
     def __init__(self, max_length):
@@ -27,7 +27,7 @@ class Length(abc.Validator):
 length = Length
 
 
-class Regex(abc.Validator):
+class Regex(abc.BoundValidator):
     BINDING = (str, )
 
     def __init__(self, regex):

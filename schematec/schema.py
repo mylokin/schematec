@@ -24,8 +24,7 @@ class Dictionary(abc.Schema):
                 raise TypeError(descriptors)
 
             if not weak:
-                unbound_validators = [v for v in descriptors if
-                                      isinstance(v, abc.Validator) and not v.BINDING]
+                unbound_validators = [v for v in descriptors if isinstance(v, abc.UnboundValidator)]
                 for validator in unbound_validators:
                     validator(name, data)
 
@@ -45,7 +44,7 @@ class Dictionary(abc.Schema):
             for converter in converters:
                 value = converter(value)
 
-            bound_validators = [v for v in descriptors if isinstance(v, abc.Validator) and v.BINDING]
+            bound_validators = [v for v in descriptors if isinstance(v, abc.BoundValidator)]
             for validator in bound_validators:
                 if isinstance(value, validator.BINDING):
                     validator(value)
@@ -82,7 +81,7 @@ class Array(abc.Schema):
         for converter in converters:
             data = map(converter, data)
 
-        bound_validators = [v for v in self.descriptors if isinstance(v, abc.Validator) and v.BINDING]
+        bound_validators = [v for v in self.descriptors if isinstance(v, abc.BoundValidator)]
         for validator in bound_validators:
             for value in data:
                 if isinstance(value, validator.BINDING):
