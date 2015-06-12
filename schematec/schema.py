@@ -19,10 +19,8 @@ class Dictionary(abc.Schema):
 
         for name, descriptors in self.descriptors.items():
             if isinstance(descriptors, abc.AbstractDescriptor):
-                descriptors = [descriptors]
-            elif isinstance(descriptors, abc.ComplexDescriptor):
-                descriptors = list(descriptors)
-            else:
+                descriptors = abc.ComplexDescriptor(descriptors)
+            elif not isinstance(descriptors, abc.ComplexDescriptor):
                 raise TypeError(descriptors)
 
             if not weak:
