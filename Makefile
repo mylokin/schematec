@@ -8,4 +8,5 @@ clean:
 	rm -rf build dist schematec.egg-info
 
 publish: test
+	git push
 	python setup.py sdist bdist_wheel upload
