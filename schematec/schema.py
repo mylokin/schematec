@@ -1,5 +1,7 @@
 from __future__ import absolute_import
 
+import functools
+
 import schematec.abc as abc
 import schematec.converters
 import schematec.exc as exc
@@ -35,10 +37,7 @@ class Dictionary(abc.Schema):
             except KeyError:
                 raise exc.SchemaError(name)
 
-            for schema in descriptors.schemas:
-                value = schema(value, weak=weak)
-
-            result[name] = descriptors(value)
+            result[name] = descriptors(value, weak=weak)
 
         return result
 
@@ -63,10 +62,7 @@ class Array(abc.Schema):
         if not self.descriptors:
             return data
 
-        for schema in self.descriptors.schemas:
-            data = [schema(d, weak=weak) for d in data]
-
-        return map(self.descriptors, data)
+        return map(functools.partial(self.descriptors, weak=weak), data)
 
 array = Array
 

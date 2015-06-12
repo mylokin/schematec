@@ -40,7 +40,10 @@ class ComplexDescriptor(Descriptor, collections.Sequence):
     def __len__(self):
         return len(self.descriptors)
 
-    def __call__(self, value):
+    def __call__(self, value, weak=False):
+        for schema in self.schemas:
+            value = schema(value, weak=weak)
+
         for converter in self.converters:
             value = converter(value)
 
